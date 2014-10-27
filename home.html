@@ -1,0 +1,31 @@
+<div>
+    <div class="col-md-2">
+        <select ng-model="actors.placeLimit" class="form-control">
+            <option ng-repeat="limit in actors.limitsSelection">{{limit}}</option>
+        </select>
+    </div>
+    <div class="col-md-2">
+
+        <select ng-model="actors.sortBy" class="form-control">
+            <option value="name">Name</option>
+            <option value="character">Character</option>
+        </select>
+    </div>
+    <div class="col-md-2">
+        <select ng-model="actors.sortDirection" class="form-control">
+            <option value="+">Ascending</option>
+            <option value="-">Descending</option>
+        </select>
+    </div>
+
+    <input placeholder="Any" class="input-lg" ng-model="searchText.$">
+    <input placeholder="Name" class="input-lg" ng-model="searchText.name">
+    <input placeholder="Character" class="input-lg" ng-model="searchText.character">
+
+    <table class="table">
+        <tr ng-repeat="actor in actors.cast | filter:searchText | orderBy: actors.sort(actors.sortBy,actors.sortDirection) | limitTo: actors.placeLimit">
+            <td>{{actor.name}}</td>
+            <td>{{actor.character}}</td>
+        </tr>
+    </table>
+</div>
